@@ -1,0 +1,857 @@
+﻿@page
+@model LetterBeauty.Views.Home.ConstructorModel
+@{
+
+}
+
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="~/js/scripts.js"></script>
+
+<div id="throbber" style="display:none; min-height:120px;"></div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav id="nav_" class="navbar-inverse" role="navigation">
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-1">Фон<i class="fa fa-fw fa-window-close close-direct pull-right"></i></a>
+                        <ul id="submenu-1" class="collapse">
+                            <li class="color">
+                                <span class="aClass">
+                                    Уровень красного по RGB
+                                    <input class="bg-color-switcher color-switcher red" id="bg-red" type="range" min="0" max="255">
+                                </span>
+                                <span class="aClass">
+                                    Уровень зеленого по RGB
+                                    <input class="bg-color-switcher color-switcher green" id="bg-green" type="range" min="0" max="255">
+                                </span>
+                                <span class="aClass">
+                                    Уровень синего по RGB
+                                    <input class="bg-color-switcher color-switcher blue" id="bg-blue" type="range" min="0" max="255">
+                                </span>
+                            </li>
+                            @*<li>
+                                <span class="aClass">
+                                    <span class="discr">Фоновое изображение</span><br>
+                                    <input type="text" id="bg-image-link" class="side-textbox" placeholder="Ссылка...">
+                                    <input type="button" class="side-input" id="set-bg-image" value="Установить">
+                                </span>
+                            </li>*@
+                            <li>
+                                <span class="aClass">
+                                    <input type="button" class="side-input" id="bg-reset" value="Сброс">
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-2">Цвет текста<i class="fa fa-fw fa-window-close close-direct pull-right"></i></a>
+                        <ul id="submenu-2" class="collapse">
+                            <li class="color">
+                                <span class="aClass">
+                                    Уровень красного по RGB
+                                    <input class="fn-color-switcher color-switcher red" id="fn-red" type="range" min="0" max="255">
+                                </span>
+                                <span class="aClass">
+                                    Уровень зеленого по RGB
+                                    <input class="fn-color-switcher color-switcher green" id="fn-green" type="range" min="0" max="255">
+                                </span>
+                                <span class="aClass">
+                                    Уровень синего по RGB
+                                    <input class="fn-color-switcher color-switcher blue" id="fn-blue" type="range" min="0" max="255">
+                                </span>
+                                <span class="aClass">
+                                    <input class="side-input" id="fn-reset" type="button" value="Сброс">
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-5">Формат текста<i class="fa fa-fw fa-window-close close-direct pull-right"></i></a>
+                        <ul class="collapse" id="submenu-5">
+                            <li class="text-align">
+                                <span class="aClass">
+                                    <span class="discr">Выравнивание</span><br>
+                                    <input type="radio" class="align-type" id="center" name="option-gr"> по центру<br>
+                                    <input type="radio" class="align-type" id="right" name="option-gr"> по правому краю<br>
+                                    <input type="radio" class="align-type" id="left" name="option-gr"> по левому краю<br>
+                                    <input type="radio" class="align-type" id="justify" name="option-gr"> по ширине<br>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="aClass">
+                                    <span class="discr">Шрифт</span><span id="font-val"></span>
+                                    <select id="font">
+                                        <optgroup label="С засечками">
+                                            <option class="font-name">Academy Engraved Let</option>
+                                            <option class="font-name">Georgia</option>
+                                            <option class="font-name">Sylfaen</option>
+                                            <option class="font-name">Courier New</option>
+                                        </optgroup>
+                                        <optgroup label="Без засечек">
+                                            <option class="font-name">Arial</option>
+                                            <option class="font-name">Century Gothic</option>
+                                            <option class="font-name">Comic Sans Ms</option>
+                                            <option class="font-name">Cursive</option>
+                                        </optgroup>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="aClass">
+                                    <span class="discr">Размер шрифта: </span><span id="size-value"></span>
+                                    <input type="range" id="font-size" min="10" max="25">
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-3">Границы <i class="fa fa-fw fa-window-close close-direct pull-right"></i></a>
+                        <ul id="submenu-3" class="collapse">
+                            <li class="border-style">
+                                <span class="aClass">
+                                    <span class="discr">Тип границ</span><br>
+                                    <input type="radio" class="border-type" id="dashed" name="option-gr">   - - - - - - - -<br>
+                                    <input type="radio" class="border-type" id="solid" name="option-gr">   ___________<br>
+                                    <input type="radio" class="border-type" id="dotted" name="option-gr">   . . . . . . . . . . . .<br>
+                                    <input type="radio" class="border-type" id="none" name="option-gr">  Без границ<br>
+                                </span>
+                            </li>
+                            <li class="border-style">
+                                <span class="aClass">
+                                    <span class="discr">Цвет границ</span><br>
+                                    Уровень красного по RGB
+                                    <input class="bor-color-switcher color-switcher red" id="bor-red" type="range" min="0" max="255">
+                                </span>
+                                <span class="aClass">
+                                    Уровень зеленого по RGB
+                                    <input class="bor-color-switcher color-switcher green" id="bor-green" type="range" min="0" max="255">
+                                </span>
+                                <span class="aClass">
+                                    Уровень синего по RGB
+                                    <input class="bor-color-switcher color-switcher blue" id="bor-blue" type="range" min="0" max="255">
+                                </span>
+                            </li>
+                            <li class="border-style">
+                                <span class="aClass">
+                                    <span class="discr">Размер : </span><span id="bor-size-val"></span><br>
+                                    <input id="bor-size" type="range" min="0" max="70">
+                                </span>
+                            </li>
+                            <li class="border-style">
+                                <span class="aClass">
+                                    <span class="discr">Закругленность : </span><span id="bor-rad-val"></span><br>
+                                    <input id="bor-rad" type="range" min="0" max="120">
+                                </span>
+                            </li>
+                            <li>
+                                <span class="aClass">
+                                    <input class="side-input" id="bor-reset" type="button" value="Сброс">
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#submenu-4">Отступы <i class="fa fa-fw fa-window-close close-direct pull-right"></i></a>
+                        <ul id="submenu-4" class="collapse">
+                            <li>
+                                <span class="aClass">
+                                    <span class="discr">Верхний: </span><span id="pad-top-val"></span><br>
+                                    <input type="range" class="paddings" id="pad-top" min="10" max="200">
+                                </span>
+                            </li>
+                            <li>
+                                <span class="aClass">
+                                    <span class="discr">Нижний: </span><span id="pad-bottom-val"></span><br>
+                                    <input type="range" class="paddings" id="pad-bottom" min="10" max="200">
+                                </span>
+                            </li>
+                            <li>
+                                <span class="aClass">
+                                    <span class="discr">Левый: </span><span id="pad-left-val"></span><br>
+                                    <input type="range" class="paddings" id="pad-left" min="10" max="200">
+                                </span>
+                            </li>
+                            <li>
+                                <span class="aClass">
+                                    <span class="discr">Правый: </span><span id="pad-right-val"></span><br>
+                                    <input type="range" class="paddings" id="pad-right" min="10" max="200">
+                                </span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="sugerencias"><i class="fa fa-fw fa-paper-plane-o"></i> MENU 4</a>
+                    </li>
+                    <li>
+                        <a href="faq"><i class="fa fa-fw fa fa-question-circle"></i> MENU 5</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </ul>
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row" id="main">
+                <div class="col-sm-12 col-md-12" id="content">
+                    <h3 align="center">Предварительный просмотр</h3>
+                    <div id="overlay">
+                        <div id="info-box"></div>
+                        <div id="letter" title="Двойной щелчок для редактирования...">
+                            <h2 class="h2" id="letter-title">Letter title...</h2>
+                            <div id="letter-body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <div id="to-send-box">
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="to-send">Готово</a>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<div id="modal_form">
+    <span id="modal_close">X</span>
+    <div>
+        <input type="text" id="edit-title" placeholder="Заголовок письма..." class="edit-control">
+        <textarea id="edit-body" placeholder="Содержимое письма..." rows="5" class="edit-control"></textarea>
+        <input type="button" value="Готово" class="edit-control side-input" id="text-ready">
+    </div>
+    <div id="selected-editor">
+        <span id="selected-editor-close">X</span>
+    </div>
+</div>
+<div id="overlay_"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title" id="exampleModalLabel"><span class="h3 my-input">Письмо готово! Выберите способ отправки:</span></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="exTab1" class="container">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#1a" data-toggle="tab">Со своего email</a>
+                        </li>
+                        <li>
+                            <a href="#2a" data-toggle="tab">От имени сервиса</a>
+                        </li>
+                        <li>
+                            <a href="#3a" data-toggle="tab">Исходный код для вставки</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content clearfix">
+                        <div class="tab-pane active" id="1a">
+                            <h3>Заполните форму отправки</h3>
+                            <br />
+                            <span class="my-label">Адрес получателя</span>
+                            <input type="text" id="1a-email-to" class="form-control my-input" placeholder="Введите адресс получателя..." />
+                            <span class="my-label">Ваш email</span>
+                            <input type="text" id="1a-email-from" class="form-control my-input" placeholder="Введите ваш адресс ел. почты..." />
+                            <span class="my-label">Пароль</span>
+                            <input type="password" id="pw" class="form-control my-input" placeholder="Введите пароль..." />
+                            <input type="button" id="1a-send" class="btn btn-success form-control" value="Отправить" />
+                        </div>
+                        <div class="tab-pane" id="2a">
+                            <h3>Заполните форму отправки</h3>
+                            <br />
+                            <span class="my-label">Адрес получателя</span>
+                            <input type="text" id="2a-email" class="form-control my-input" placeholder="Введите адресс получателя..." />
+                            <input type="button" id="2a-send" class="btn btn-success form-control" value="Отправить" />
+                        </div>
+                        <div class="tab-pane" id="3a">
+                            <h3>Исходный код письма</h3>
+                            <input type="button" id="get-sourse" class="btn btn-success form-control my-input" value="Получить исходный код" />
+                            <br />
+                            <textarea id="sourse" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function GetSourseCode() {
+        var letterHTML = $('#letter').html().split('\n').join('').trim().replace(/\s+/g, ' ');
+        var cssText = $('#letter').css('cssText');
+        var letterAll = '<div style="width:550px;margin: 0 auto;' + cssText + '">' + letterHTML + '</div>';
+        return letterAll;
+    }
+
+    function sendAjaxForm(sendType, letter, emailFrom, emailTo, password) {
+
+        var _mail, _password;
+
+
+        if (sendType == "myAddress") {
+            _mail = emailFrom;
+            _password = password;
+        } else {
+            _mail = "stillkost@mail.ru";
+            _password = "";
+        }
+
+        $.ajax({
+            //url: "home/sendletter/weeb",
+            url: "@Url.Action("SendLetter","Home")",
+            type: "POST",
+            dataType: "text",
+            data: {
+                sendType: sendType,
+                letter: letter,
+                adressFrom: _mail,
+                adressTo: emailTo,
+                password: _password
+            },
+            success: function (response) {
+                alert("УДАЧА! ПРОВЕРЬ ПОЧТУ!");
+            },
+            error: function (response) {
+                alert('Ошибка. Данные не отправлены.');
+            }
+        });
+    }
+
+    $('#1a-send').click(function () {
+        var sendType, letter, emailFrom, emailTo, password;
+
+        sendType = "myAddress";
+        letter = GetSourseCode();
+        emailFrom = $('#1a-email-from').val().trim();
+        emailTo = $('#1a-email-to').val().trim();
+        password = $('#pw').val().trim();
+
+        sendAjaxForm(sendType, letter, emailFrom, emailTo, password);
+    });
+
+    $('#2a-send').click(function () {
+        var sendType, letter, emailFrom, emailTo, password;
+
+        sendType = "fromService";
+        letter = GetSourseCode();
+        emailFrom = $('#1a-email-from').val().trim();
+        emailTo = $('#2a-email').val().trim();
+        password = "";
+
+        sendAjaxForm(sendType, letter, emailFrom, emailTo, password);
+    });
+</script>
+
+
+
+<style>
+
+    #exTab1 {
+        width: 100%;
+    }
+
+    #sourse {
+        resize: none;
+        height: 300px;
+        display: none;
+    }
+
+    .my-input {
+        margin-bottom: 18px;
+        margin-top: 6px;
+    }
+
+    .my-label {
+        font-size: 18px;
+    }
+
+    body {
+        padding: 10px;
+    }
+
+    #exTab1 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    #exTab2 h3 {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    /* remove border radius for the tab */
+
+    #exTab1 .nav-pills > li > a {
+        border-radius: 0;
+    }
+
+    /* change border radius for the tab , apply corners on top*/
+
+    #exTab3 .nav-pills > li > a {
+        border-radius: 4px 4px 0 0;
+    }
+
+    #exTab3 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    #to-send-box {
+        text-align: center;
+        width: 70%;
+        position: fixed;
+        bottom: 10px;
+    }
+
+    #to-send {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .in {
+        background: grey;
+    }
+
+    #letter {
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: center;
+    }
+
+    .edit-control {
+        width: 100% !important;
+    }
+
+    ul > select, ul > input[type="text"], ul > textarea {
+        padding: 3px 7px 3px 7px;
+        font-size: 17px;
+        font-style: italic;
+        border-radius: 7px;
+        border: 1px solid;
+        width: 100%;
+        margin: 10px 0px 10px 0px;
+    }
+
+    #edit-body {
+        resize: none;
+        width: 100%;
+    }
+
+    .side-textbox {
+        background: white;
+        color: black;
+        padding: 3px 7px 3px 7px;
+    }
+
+        .side-textbox:hover {
+            color: black;
+            padding: 3px 7px 3px 7px;
+            border-radius: 7px;
+            border: 1px solid;
+        }
+
+    .discr {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #000000;
+        font-weight: 800;
+    }
+
+    .side-input {
+        background: black;
+        color: white;
+        border: none;
+        padding: 15px;
+    }
+
+    input[type=range] {
+        -webkit-appearance: none; /* Скрывает слайдер, чтобы можно было создать свой */
+        width: 100%; /* Указание параметра ширины требуется для Firefox. */
+        margin: 20px 0px 20px 0px;
+    }
+
+    input .side-nav {
+        width: 100%
+    }
+
+    input[type=range].red {
+        background: red;
+    }
+
+    input[type=range].green {
+        background: green;
+    }
+
+    input[type=range].blue {
+        background: blue;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+
+    input[type=range]:focus {
+        outline: none;
+    }
+
+    input[type=range]::-ms-track {
+        cursor: pointer;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+    }
+
+    /* Специальные правила для браузеров на движках WebKit/Blink */
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 1px solid #000000;
+        height: 36px;
+        width: 16px;
+        border-radius: 3px;
+        background: #ffffff;
+        cursor: pointer;
+        margin-top: -14px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    }
+
+    /* Тоже самое для Firefox */
+    input[type=range]::-moz-range-thumb {
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border: 1px solid #000000;
+        height: 36px;
+        width: 16px;
+        border-radius: 3px;
+        background: #ffffff;
+        cursor: pointer;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+    }
+
+
+    input[type=range]::-moz-range-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+    }
+
+    input[type=range]::-ms-track {
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        background: transparent;
+        border-color: transparent;
+        border-width: 16px 0;
+        color: transparent;
+    }
+
+    input[type=range]::-ms-fill-lower {
+        background: #2a6495;
+        border: 0.2px solid #010101;
+        border-radius: 2.6px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    }
+
+    input[type=range]::-ms-fill-upper {
+        border: 0.2px solid #010101;
+        border-radius: 2.6px;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    }
+
+    input[type=range]:focus::-ms-fill-upper {
+        background: #367ebd;
+    }
+
+    .side-input:hover {
+        background: white;
+        color: black;
+        border: none;
+        padding: 15px;
+    }
+
+    @@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
+    @@media(min-width:768px) {
+        body {
+            margin-top: 50px;
+        }
+    }
+
+    #wrapper {
+        padding-left: 0;
+    }
+
+    #page-wrapper {
+        width: 100%;
+        padding: 0;
+        background-color: #fff;
+    }
+
+    @@media(min-width:768px) {
+        #wrapper {
+            padding-left: 225px;
+        }
+
+        #page-wrapper {
+            padding: 22px 10px;
+        }
+    }
+
+    /* Top Navigation */
+
+    .top-nav {
+        padding: 0 15px;
+    }
+
+        .top-nav > li {
+            display: inline-block;
+            float: left;
+        }
+
+            .top-nav > li > a, .aClass {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                line-height: 20px;
+                color: #000;
+            }
+
+                .top-nav > li > a:hover,
+                .top-nav > li > a:focus,
+                .top-nav > .open > a,
+                .top-nav > .open > a:hover,
+                .top-nav > .open > a:focus,
+                .aClass:focus {
+                    color: #000;
+                    background-color: #1a242f;
+                }
+
+        .top-nav > .open > .dropdown-menu {
+            float: left;
+            position: absolute;
+            margin-top: 0;
+            /*border: 1px solid rgba(0,0,0,.15);*/
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            background-color: #fff;
+            -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+
+            .top-nav > .open > .dropdown-menu > li > a, .aClass {
+                white-space: normal;
+            }
+
+    /* Side Navigation */
+
+    @@media(min-width:768px) {
+        .side-nav {
+            position: fixed;
+            top: 60px;
+            left: 225px;
+            width: 240px;
+            margin-left: -225px;
+            border: none;
+            border-radius: 0;
+            border-top: 1px rgba(0,0,0,.5) solid;
+            overflow-y: auto;
+            background-color: #fff;
+            /*background-color: #5A6B7D;*/
+            bottom: 0;
+            overflow-x: hidden;
+            padding-bottom: 40px;
+        }
+
+            .side-nav > li > a {
+                width: 225px;
+                border-bottom: 1px rgba(0,0,0,.3) solid;
+            }
+
+            .side-nav li a:hover,
+            .side-nav li a:focus, .aClass:focus, .aClass:hover {
+                outline: none;
+                background-color: #000 !important;
+                color: #fff;
+            }
+    }
+
+    .side-nav > li > ul {
+        padding: 0;
+        border-bottom: 1px rgba(0,0,0,.3) solid;
+    }
+
+        .side-nav > li > ul > li > a, .aClass {
+            display: block;
+            padding: 10px 15px 10px 38px;
+            text-decoration: none;
+            /*color: #999;*/
+            color: #000;
+        }
+
+
+    .navbar .nav > li > a > .label {
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        position: absolute;
+        top: 14px;
+        right: 6px;
+        font-size: 10px;
+        font-weight: normal;
+        min-width: 15px;
+        min-height: 15px;
+        line-height: 1.0em;
+        text-align: center;
+        padding: 2px;
+    }
+
+    .navbar .nav > li > a:hover > .label {
+        top: 10px;
+    }
+
+    .navbar-brand {
+        padding: 5px 15px;
+    }
+
+    #overlay {
+        width: 100%;
+    }
+
+    #letter {
+        width: 550px;
+        margin: 0 auto;
+        padding: 10px;
+    }
+
+    #letter-title,
+    #letter-body {
+        padding: 10px;
+    }
+
+    #letter-body {
+        padding-top: 0px;
+    }
+
+    select {
+        color: black;
+    }
+
+    #text-ready:hover {
+        border: 1px solid black;
+    }
+
+    #modal_form {
+        width: 70%;
+        height: 400px;
+        border-radius: 5px;
+        border: 3px #000 solid;
+        background: #fff;
+        position: fixed;
+        bottom: 10%;
+        left: 25%;
+        margin-top: -150px;
+        margin-left: -150px;
+        display: none;
+        opacity: 0;
+        z-index: 5;
+        padding: 30px;
+    }
+        /* Кнoпкa зaкрыть для тех ктo в тaнке) */
+        #modal_form #modal_close, #selected-editor-close {
+            width: 21px;
+            height: 21px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            display: block;
+        }
+    /* Пoдлoжкa */
+    #overlay_ {
+        z-index: 3;
+        position: fixed;
+        background-color: #000;
+        opacity: 0.8;
+        -moz-opacity: 0.8;
+        filter: alpha(opacity=80);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+        display: none;
+    }
+
+
+    #selected-editor {
+        width: 280px;
+        /* height: 20px; */
+        background-color: #c5cecf;
+        position: fixed;
+        border: 1px solid;
+        padding: 10px;
+        display: none;
+    }
+
+    #selected-editor-close {
+        top: 0;
+        right: 0;
+        font-weight: bold;
+    }
+
+    .close-direct {
+        cursor: pointer;
+        color: red;
+    }
+</style>

@@ -1,0 +1,106 @@
+﻿@{
+}
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="~/js/scripts.js"></script>
+
+<br /><br /><br />
+<div class="container"><h1>Письмо готово! Выберите способ отправки:</h1></div>
+<div id="exTab1" class="container">
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#1a" data-toggle="tab">Со своего email</a>
+        </li>
+        <li>
+            <a href="#2a" data-toggle="tab">От имени сервиса</a>
+        </li>
+        <li>
+            <a href="#3a" data-toggle="tab">Исходный код для вставки</a>
+        </li>
+    </ul>
+
+    <div class="tab-content clearfix">
+        <div class="tab-pane active" id="1a">
+            <h3>Заполните форму отправки</h3>
+            <br />
+            <span class="my-label">Адрес получателя</span>
+            <input type="text" class="form-control my-input" placeholder="Введите адресс получателя..." />
+            <span class="my-label">Ваш email</span>
+            <input type="text" class="form-control my-input" placeholder="Введите ваш адресс ел. почты..." />
+            <span class="my-label">Пароль</span>
+            <input type="text" class="form-control my-input" placeholder="Введите пароль..." />
+            <input type="button" class="btn btn-success form-control" value="Отправить" />
+        </div>
+        <div class="tab-pane" id="2a">
+            <h3>Заполните форму отправки</h3>
+            <br />
+            <span class="my-label">Адрес получателя</span>
+            <input type="text" class="form-control my-input" placeholder="Введите адресс получателя..." />
+            <input type="button" class="btn btn-success form-control" value="Отправить" />
+        </div>
+        <div class="tab-pane" id="3a">
+            <h3>Исходный код письма</h3>
+            <input type="button" id="get-sourse" class="btn btn-success form-control my-input" value="Получить исходный код" />
+            <br />
+            <textarea id="sourse" class="form-control"></textarea>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    #sourse {
+        resize: none;
+        height: 300px;
+        display: none;
+    }
+
+    .my-input {
+        margin-bottom: 18px;
+        margin-top: 6px;
+    }
+
+    .my-label {
+        font-size: 18px;
+    }
+
+    body {
+        padding: 10px;
+    }
+
+    #exTab1 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    #exTab2 h3 {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+
+    /* remove border radius for the tab */
+
+    #exTab1 .nav-pills > li > a {
+        border-radius: 0;
+    }
+
+    /* change border radius for the tab , apply corners on top*/
+
+    #exTab3 .nav-pills > li > a {
+        border-radius: 4px 4px 0 0;
+    }
+
+    #exTab3 .tab-content {
+        color: white;
+        background-color: #428bca;
+        padding: 5px 15px;
+    }
+</style>
