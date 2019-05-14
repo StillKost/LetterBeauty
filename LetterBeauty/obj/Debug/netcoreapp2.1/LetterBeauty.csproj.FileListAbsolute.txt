@@ -32,3 +32,4 @@ C:\Users\user\Desktop\LetterBeauty\LetterBeauty\obj\Debug\netcoreapp2.1\LetterBe
 C:\Users\user\Desktop\LetterBeauty\LetterBeauty\obj\Debug\netcoreapp2.1\LetterBeauty.csproj.CopyComplete
 C:\Users\user\Desktop\LetterBeauty\LetterBeauty\obj\Debug\netcoreapp2.1\Razor\Views\Home\Constructor.g.cshtml.cs
 C:\Users\user\Desktop\LetterBeauty\LetterBeauty\obj\Debug\netcoreapp2.1\Razor\Views\Home\SendLetter.g.cshtml.cs
+C:\Users\user\Desktop\LetterBeauty\LetterBeauty\obj\Debug\netcoreapp2.1\Razor\Views\Home\Maps.g.cshtml.cs

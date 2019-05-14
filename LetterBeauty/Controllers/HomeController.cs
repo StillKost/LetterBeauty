@@ -54,6 +54,11 @@ namespace LetterBeauty.Controllers
         {
             return View();
         }
+
+        public IActionResult Maps()
+        {
+            return View();
+        }
         #endregion
 
         ////////////////////////////////////////////////////////////////////////////////////
@@ -101,6 +106,7 @@ namespace LetterBeauty.Controllers
             }
 
         }
+
 
     }
 }

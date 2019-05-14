@@ -1,17 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<br />
+<br />
 
 <div class="row">
-    <a href="@Url.Action("Constructor","Home")" class="btn btn-success" id="start">
+    <a href="@Url.Action("Constructor","Home")" class="btn btn-primary form-control">
         Перейти в конструктор
+    </a>
+</div>
+<div class="row">
+    <a href="@Url.Action("Maps","Home")" class="btn btn-primary form-control">
+        Карты
     </a>
 </div>
 
 <style>
-    #start{
-        width: 100%;
-        margin: 50px;
+    .form-control{
+        margin-bottom: 25px;
     }
 </style>
