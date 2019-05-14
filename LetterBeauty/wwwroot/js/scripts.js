@@ -83,7 +83,7 @@
     }
 
     //БЕРЕМ ВЫДЕЛЕННЫЙ ТЕКСТ
-    var getSelected = function () {
+    function getSelected() {
         var t = '';
         if (window.getSelection) {
             t = window.getSelection();
@@ -113,10 +113,70 @@
     //    console.log(XYc);
     //}, 2000);
 
+    function RandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////CONSTRUCTOR EVENTS///////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////
+
+    $('#randomDesign').click(function () {
+        //цвет текста
+        var rgbFonf = 'rgb(' + RandomInt(0, 255) + ',' + RandomInt(0, 255) + ',' + RandomInt(0, 255) + ')';
+        $(container).css('color', rgbFonf);
+        //цвет фона
+        var rgbBg = 'rgb(' + RandomInt(0, 255) + ',' + RandomInt(0, 255) + ',' + RandomInt(0, 255) + ')';
+        $(container).css('background-color', rgbBg);
+        //размер шрифта
+        $(container).css('font-size', RandomInt(10, 22));
+        //выравнивание
+        var alignTypes = [];
+        var alignOptions = $('.align-type');
+        for (var i = 0; i < alignOptions.length; i++) {
+            alignTypes[i] = $(alignOptions[i]).attr('id');
+        }
+        var randomAlignType = alignTypes[RandomInt(0, alignTypes.length)];
+        $(container).css('text-align', randomAlignType);
+        //шрифт
+        //var fonts = [];
+        //var fontOptions = $('#font').find('option');
+        //for (var i = 0; i < fontOptions.length; i++) {
+        //    fonts[i] = $(fontOptions[i]).text();
+        //}
+        //var randomFont = fonts[RandomInt(0, fonts.length)];
+        //$(container).css('font-family', randomFont);
+        //есть ли границы
+        var bools = [true, false];
+        var randomBrdr = bools[RandomInt(0, bools.length)];
+        //если есть
+        if (randomBrdr) {
+            //тип границ
+            var borderTypes = [];
+            var borderOptions = $('.border-type');
+            for (var i = 0; i < borderOptions.length; i++) {
+                borderTypes[i] = $(borderOptions[i]).attr('id');
+            }
+            var randomBorderType = borderTypes[RandomInt(0, borderTypes.length)];
+            $(container).css('border', randomBorderType);
+            //размер границ
+            $(container).css('border-width', RandomInt(1,70) + 'px');
+            //загругленность
+            $(container).css('border-radius', RandomInt(1, 120) + 'px');
+            //цвет границ
+            var rgbBrdr = 'rgb(' + RandomInt(0, 255) + ',' + RandomInt(0, 255) + ',' + RandomInt(0, 255) + ')';
+            $(container).css('border-color', rgbBrdr);
+        } else {
+            //если нет
+            $(container).css('border', 'none');
+        }
+        //отступы
+        $(container).css('padding-top', RandomInt(0, 200) + 'px');
+        $(container).css('padding-bottom', RandomInt(0, 200) + 'px');
+        $(container).css('padding-left', RandomInt(0, 200) + 'px');
+        $(container).css('padding-right', RandomInt(0, 200) + 'px');
+    });
+
     $('.bg-color-switcher').change(function () {
         var red = $('#bg-red').val();
         var green = $('#bg-green').val();
@@ -244,16 +304,24 @@
     });
 
     $('#edit-body').select(function (e) {
-        var coordinates = XYc.split(',');
-        $('#selected-editor').css('top', coordinates[1] + 'px');
-        $('#selected-editor').css('left', coordinates[0] + 'px');
-        $('#selected-editor').show();
-
+        //var coordinates = XYc.split(',');
+        //$('#selected-editor').css('top', coordinates[1] + 'px');
+        //$('#selected-editor').css('left', coordinates[0] + 'px');
+        //$('#selected-editor').show();
+        var sel = getSelected();
+        $('#to-edit').html(sel.toString());
     });
 
     $('#selected-editor-close').click(function () {
         $('#selected-editor').hide();
     });
+
+    $('#bold').click(function () {
+        var text = $('#to-edit').text();
+        edited = '<b>' + text + '</b>';
+        $('#to-edit').text(edited);
+    });
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -269,60 +337,21 @@
         return letterAll;
     }
 
-    var code;
+    //var code;
     $('#to-send').click(function () {
-        code = GetSourseCode();
+        var code = GetSourseCode();
+    });
+
+    $('#refresh-souse').click(function () {
+        var code = GetSourseCode();
+        $('#sourse').val(code);
     });
 
     $('#get-sourse').click(function () {
-        code = GetSourseCode();
+        var code = GetSourseCode();
         $('#sourse').val(code);
-        $('#sourse').show();
+        $('#sourse').toggle();
     });
 
-    //function sendAjaxForm(sendType, letter, emailFrom, emailTo, password) {
-
-    //    var _mail, _password;
-
-
-    //    if (sendType == "myAddress") {
-    //        _mail = emailFrom;
-    //        _password = password;
-    //    } else {
-    //        _mail = "stillkost@mail.ru";
-    //        _password = "";
-    //    }
-
-    //    $.ajax({
-    //        url: "home/sendletter/weeb",
-    //        type: "POST",
-    //        dataType: "text",
-    //        data: {
-    //            sendType: sendType,
-    //            letter: letter,
-    //            adressFrom: _mail,
-    //            adressTo: emailTo,
-    //            password: _password
-    //        }, 
-    //        success: function (response) {
-    //            alert("УДАЧА! ПРОВЕРЬ ПОЧТУ!");
-    //        },
-    //        error: function (response) { 
-    //            alert('Ошибка. Данные не отправлены.');
-    //        }
-    //    });
-    //}
-
-    //$('#1a-send').click(function () {
-    //    var sendType, letter, emailFrom, emailTo, password;
-
-    //    sendType = "myAddress";
-    //    letter = code;
-    //    emailFrom = $('#1a-email-from').val().trim();
-    //    emailTo = $('#1a-email-to').val().trim();
-    //    password = $('#pw').val().trim();
-
-    //    sendAjaxForm(sendType, letter, emailFrom, emailTo);
-    //});
-
+   
 });

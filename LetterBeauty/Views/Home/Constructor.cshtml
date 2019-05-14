@@ -12,6 +12,7 @@
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 <script type="text/javascript" src="~/js/scripts.js"></script>
+<script src="~/js/pace.min.js"></script>
 
 <div id="throbber" style="display:none; min-height:120px;"></div>
 <div id="noty-holder"></div>
@@ -191,11 +192,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    @*<li>
                         <a href="sugerencias"><i class="fa fa-fw fa-paper-plane-o"></i> MENU 4</a>
-                    </li>
+                    </li>*@
                     <li>
-                        <a href="faq"><i class="fa fa-fw fa fa-question-circle"></i> MENU 5</a>
+                        <a href="#" class="btn btn-primary" id="randomDesign"><i class="fa fa-random"></i> Случайный дизайн </a>
                     </li>
                 </ul>
             </div>
@@ -237,9 +238,14 @@
 <div id="modal_form">
     <span id="modal_close">X</span>
     <div>
-        <input type="text" id="edit-title" placeholder="Заголовок письма..." class="edit-control">
-        <textarea id="edit-body" placeholder="Содержимое письма..." rows="5" class="edit-control"></textarea>
-        <input type="button" value="Готово" class="edit-control side-input" id="text-ready">
+        <input type="text" id="edit-title" placeholder="Заголовок письма..." class="form-control">
+        <textarea id="edit-body" placeholder="Содержимое письма..." rows="5" class="form-control"></textarea>
+        <div class="" id="to-edit"></div>
+        <span class="btn btn-default" id="bold" title="Жирный"><b>Ж</b></span>
+        <span class="btn btn-default" id="ital" title="Курсив"><i>K</i></span>
+        <span class="btn btn-default" id="uns" title="Подчеркнутый"><u>П</u></span>
+        <br />
+        <input type="button" value="Готово" class="side-input" id="text-ready">
     </div>
     <div id="selected-editor">
         <span id="selected-editor-close">X</span>
@@ -292,11 +298,16 @@
                         </div>
                         <div class="tab-pane" id="3a">
                             <h3>Исходный код письма</h3>
-                            <input type="button" id="get-sourse" class="btn btn-success form-control my-input" value="Получить исходный код" />
-                            <br />
-                            <textarea id="sourse" class="form-control"></textarea>
+                                <div class="btn-group">
+                                    <input type="button" id="get-sourse" class="btn btn-success" value="Получить исходный код" />
+                                    <a href="#" id="refresh-souse" class="btn btn-default">
+                                        <i class="fa fa-refresh"></i>
+                                    </a>
+                                </div>
+                                <br />
+                                <textarea id="sourse" class="form-control"></textarea>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -308,6 +319,10 @@
 </div>
 
 <script>
+
+    paceOptions = {
+        ajax: true, 
+    };
 
     function GetSourseCode() {
         var letterHTML = $('#letter').html().split('\n').join('').trim().replace(/\s+/g, ' ');
@@ -325,7 +340,7 @@
             _mail = emailFrom;
             _password = password;
         } else {
-            _mail = "stillkost@mail.ru";
+            _mail = "letter.beauty@inbox.ru";
             _password = "";
         }
 
@@ -370,14 +385,19 @@
         emailFrom = $('#1a-email-from').val().trim();
         emailTo = $('#2a-email').val().trim();
         password = "";
-
+        Pace.start();
         sendAjaxForm(sendType, letter, emailFrom, emailTo, password);
+        Pace.stop();
     });
 </script>
 
 
 
 <style>
+
+    #modal_form > div > input {
+        margin: 10px 0px 10px 0px;
+    }
 
     #exTab1 {
         width: 100%;
@@ -854,4 +874,81 @@
         cursor: pointer;
         color: red;
     }
+    .btn-group{
+        margin-bottom: 15px;
+    }
+ .pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace .pace-activity {
+  display: block;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: #29d;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  -webkit-transform: translateX(100%) translateY(-100%) rotate(45deg);
+  transform: translateX(100%) translateY(-100%) rotate(45deg);
+  pointer-events: none;
+}
+
+.pace.pace-active .pace-activity {
+  -webkit-transform: translateX(50%) translateY(-50%) rotate(45deg);
+  transform: translateX(50%) translateY(-50%) rotate(45deg);
+}
+
+.pace .pace-activity::before,
+.pace .pace-activity::after {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    display: block;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    content: '';
+}
+
+.pace .pace-activity::before {
+    margin-left: -40px;
+    width: 80px;
+    height: 80px;
+    border-right-color: rgba(0, 0, 0, .2);
+    border-left-color: rgba(0, 0, 0, .2);
+    -webkit-animation: pace-theme-corner-indicator-spin 3s linear infinite;
+    animation: pace-theme-corner-indicator-spin 3s linear infinite;
+}
+
+.pace .pace-activity::after {
+    bottom: 50px;
+    margin-left: -20px;
+    width: 40px;
+    height: 40px;
+    border-top-color: rgba(0, 0, 0, .2);
+    border-bottom-color: rgba(0, 0, 0, .2);
+    -webkit-animation: pace-theme-corner-indicator-spin 1s linear infinite;
+    animation: pace-theme-corner-indicator-spin 1s linear infinite;
+}
+
+@@-webkit-keyframes pace-theme-corner-indicator-spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(359deg); }
+}
+@@keyframes pace-theme-corner-indicator-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(359deg); }
+}
+
+
 </style>
